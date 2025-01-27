@@ -24,3 +24,10 @@ Product documentation for the toolkit is available at
    ```console
    sphinx-build -b html docs _build/docs
    ```
+
+## Publishing the Documentation
+
+Tag the commit to publish with `docs-v<semver>`.
+Push the tag to GitHub.
+
+To avoid publishing the documentation as the latest, ensure the commit has `/not-latest` on a single line, tag that commit, and push to GitHub.
