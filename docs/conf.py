@@ -33,6 +33,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
     "sphinx_reredirects",
+    "sphinxcontrib.autodoc_pydantic",
 ]
 
 redirects = {

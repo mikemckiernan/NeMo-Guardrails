@@ -112,6 +112,7 @@ user-guides/advanced/safeguarding-ai-virtual-assistant-blueprint
 :hidden:
 
 architecture/index
+configuration
 glossary
 faqs
 ```
