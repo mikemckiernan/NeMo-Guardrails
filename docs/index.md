@@ -66,6 +66,15 @@ user-guides/advanced/safeguarding-ai-virtual-assistant-blueprint
 ```
 
 ```{toctree}
+:caption: Community Integrations
+:name: Community Integrations
+:hidden:
+:glob:
+
+user-guides/community/*
+```
+
+```{toctree}
 :caption: Security
 :name: Security
 :hidden:
