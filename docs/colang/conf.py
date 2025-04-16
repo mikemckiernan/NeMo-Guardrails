@@ -16,15 +16,19 @@
 # Copyright (c) 2024, NVIDIA CORPORATION.
 
 from datetime import date
+from pathlib import Path
 
 from toml import load
 
-project = "NVIDIA NeMo Guardrails"
+project = "NeMo Guardrails and Colang"
 this_year = date.today().year
 copyright = f"2023-{this_year}, NVIDIA Corporation"
 author = "NVIDIA Corporation"
 release = "0.0.0"
-with open("../pyproject.toml") as f:
+
+with open(
+    Path(__file__).parent.parent.parent / "pyproject.toml", encoding="utf-8"
+) as f:
     t = load(f)
     release = t.get("tool").get("poetry").get("version")
 
@@ -35,18 +39,7 @@ extensions = [
     "sphinx_reredirects",
 ]
 
-redirects = {
-    "introduction": "index.html",
-    "documentation": "index.html",
-}
-
 copybutton_exclude = ".linenos, .gp, .go"
-
-exclude_patterns = [
-    "README.md",
-    "community",
-    "colang",
-]
 
 myst_linkify_fuzzy_links = False
 myst_heading_anchors = 3
@@ -60,6 +53,10 @@ myst_enable_extensions = [
 myst_substitutions = {
     "version": release,
 }
+
+exclude_patterns = [
+    "_build/**",
+]
 
 # intersphinx_mapping = {
 #     'gpu-op': ('https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest', None),
@@ -85,4 +82,4 @@ html_theme_options = {
     },
 }
 
-html_baseurl = "https://docs.nvidia.com/nemo/guardrails/latest/"
+html_baseurl = "https://docs.nvidia.com/nemo/guardrails/community/latest/"

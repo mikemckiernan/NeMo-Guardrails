@@ -16,8 +16,8 @@
 :hidden:
 
 About NeMo Guardrails <self>
-getting-started/installation-guide
-getting-started.md
+installation-guide
+getting-started
 ```
 
 ```{toctree}
@@ -66,6 +66,15 @@ user-guides/advanced/safeguarding-ai-virtual-assistant-blueprint
 ```
 
 ```{toctree}
+:caption: Related Documents
+:name: Related Documents
+:hidden:
+
+Guardrails with Colang <http://../../colang/index.html>
+Community Integrations <http://../../community/index.html>
+```
+
+```{toctree}
 :caption: Security
 :name: Security
 :hidden:
@@ -81,31 +90,6 @@ security/red-teaming
 
 evaluation/README
 evaluation/llm-vulnerability-scanning
-```
-
-```{toctree}
-:caption: Guardrails with Colang
-:name: Guardrails with Colang
-:hidden:
-
-getting-started/1-hello-world/README
-getting-started/2-core-colang-concepts/README
-getting-started/3-demo-use-case/README
-getting-started/4-input-rails/README
-getting-started/5-output-rails/README
-getting-started/6-topical-rails/README
-getting-started/7-rag/README
-```
-
-```{toctree}
-:caption: Colang 2.0
-:name: Colang 2.0
-:hidden:
-
-colang-2/overview
-colang-2/whats-changed
-colang-2/getting-started/index
-colang-2/language-reference/index
 ```
 
 ```{toctree}
