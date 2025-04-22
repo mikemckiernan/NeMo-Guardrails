@@ -21,7 +21,7 @@ test_coverage:
 test_profile:
 	poetry run pytest -vv tests/ --profile-svg
 
-docs: docs-guardrails docs-community docs-colang
+docs: docs-guardrails docs-community docs-colang docs-review
 
 docs-guardrails:
 	poetry run sphinx-build -b html docs _build/docs/guardrails
@@ -31,6 +31,9 @@ docs-community:
 
 docs-colang:
 	poetry run sphinx-build -b html docs/colang _build/docs/colang
+
+docs-review:
+	poetry run sphinx-build -b html docs/review _build/docs
 
 pre_commit:
 	pre-commit install
