@@ -185,9 +185,11 @@ You can enable streaming to provide asynchronous responses and reduce the time t
        streaming:
           chunk_size: 200
           context_size: 50
+          enabled: True
 
    streaming: True
    ```
+   Note that, the `enabled: True` filed is needed to enable streaming output rails while `streaming: True` is needed to enable streaming generation.
 
 1. Call the `stream_async` method and handle the chunked response:
 
