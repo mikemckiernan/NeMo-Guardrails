@@ -954,16 +954,17 @@ Times reported below in are **averages** and are reported in milliseconds.
 
 ### Injection Detection
 
-NeMo Guardrails offers detection of potential injection attempts such as code injection, cross-site scripting, SQL injection, and template injection.
+NeMo Guardrails offers detection of potential exploitation attempts by using injection such as code injection, cross-site scripting, SQL injection, and template injection.
 Injection detection is primarily intended to be used in agentic systems to enhance other security controls as part of a defense-in-depth strategy.
 
 The first part of injection detection is [YARA rules](https://yara.readthedocs.io/en/stable/index.html).
 A YARA rule specifies a set of strings--text or binary patterns--to match and a Boolean expression that specifies the logic of the rule.
-YARA rules is a technology that is familiar to many security teams.
+YARA rules are a technology that is familiar to many security teams.
 
 The second part of injection detection is specifying the action to take when a rule is triggered.
 You can specify to *reject* the text and return "I'm sorry, the desired output triggered rule(s) designed to mitigate exploitation of {detections}."
-Or, you can specify to *omit* the triggering text from the response.
+Rejecting the output is the safest action and most appropriate for production deployments.
+As an alternative to rejecting the output, you can specify to *omit* the triggering text from the response.
 
 #### About the Default Rules
 
@@ -971,7 +972,7 @@ By default, NeMo Guardrails provides the following rules:
 
 - Code injection (Python): Recommended if the LLM output is used as an argument to downstream functions or passed to a code interpreter.
 - SQL injection: Recommended if the LLM output is used as part of a SQL query to a database.
-- Template injection (Jinja): Recommended for use if LLM output is rendered using templating languages like Jinja.
+- Template injection (Jinja): Recommended for use if LLM output is rendered using the Jinja templating language.
   This rule is usually paired with code injection rules.
 - Cross-site scripting (Markdown and Javascript): Recommended if the LLM output is rendered directly in HTML or Markdown.
 
