@@ -1,6 +1,8 @@
 # Guardrails Evaluation
 
-NeMo Guardrails includes a set of tools that you can use to evaluate the different types of rails. In the current version, these tools test the performance of each type of rail individually. You can use the evaluation tools through the `nemoguardrails` CLI. Examples will be provided for each type of rail.
+NeMo Guardrails includes a set of tools that you can use to evaluate the different types of rails.
+These tools test the performance--in terms of accuracy and latency--of each type of rail individually.
+You can use the evaluation tools through the `nemoguardrails` CLI.
 
 At the same time, we provide preliminary results on the performance of the rails on a set of public datasets that are relevant to each task at hand.
 
@@ -184,6 +186,11 @@ We breakdown the performance into positive entailment accuracy and negative enta
 
 *The threshold used for align_score is 0.7, i.e. an align_score >= 0.7 is considered a factual statement, and an align_score < 0.7 signifies an incorrect statement.
 ^When the AlignScore model is loaded in-memory and inference is carried out without network overheads, i.e., not as a RESTful service.
+
+#### Related Documentation
+
+For information about evaluating the accuracy and performance of input and output rails with content safety,
+refer to [Measuring the Effectiveness and Performance of AI Guardrails in Generative AI Applications](https://developer.nvidia.com/blog/measuring-the-effectiveness-and-performance-of-ai-guardrails-in-generative-ai-applications/) on developer.nvidia.com.
 
 ### Moderation Rails
 
