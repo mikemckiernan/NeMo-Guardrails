@@ -103,6 +103,7 @@ nemoguardrails find-providers [--list]
 ```
 
 The command supports two modes:
+
 - Interactive mode (default): Guides you through selecting a provider type (text completion or chat completion) and then shows available providers for that type
 - List mode (`--list`): Simply lists all available providers without interactive selection
 
@@ -686,10 +687,10 @@ rails:
   output:
     - rail name
   streaming:
+    enabled: True
     chunk_size: 200
     context_size: 50
     stream_first: True
-    enabled: True
 
 streaming: True
 ```
@@ -736,6 +737,11 @@ The following table describes the subfields for the `streaming` field:
     Specifying approximately 25% of `chunk_size` provides a good compromise.
   - `50`
 
+* - streaming.enabled
+  - When set to `True`, the toolkit executes output rails in streaming mode.
+
+  - `False`
+
 * - streaming.stream_first
   - When set to `False`, the toolkit applies the output rails to the chunks before streaming them to the client.
     If you set this field to `False`, you can avoid streaming chunks of blocked content.
@@ -743,11 +749,6 @@ The following table describes the subfields for the `streaming` field:
     By default, the toolkit streams the chunks as soon as possible and before applying output rails to them.
 
   - `True`
-
-* - streaming.enabled
-  - When set to True enable the execution of the output rails in streaming mode.
-
-  - `False`
 ```
 
 The following table shows how the number of tokens, chunk size, and context size interact to trigger the number of rails invocations.
