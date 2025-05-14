@@ -45,7 +45,7 @@ The sample code uses the [Llama 3.3 70B Instruct model](https://build.nvidia.com
    The `models` key in the `config.yml` file configures the LLM model.
    For more information about the key, refer to [](./user-guides/configuration-guide.md#the-llm-model).
 
-1. Create a prompts file, such as `config/prompts.yml`, ([download](https://raw.githubusercontent.com/NVIDIA/NeMo-Guardrails/refs/heads/develop/examples/configs/gs_content_safety/config/prompts.yml)), with contents like the following partial example:
+1. Create a prompts file, such as `config/prompts.yml`, ([download](path:../examples/configs/gs_content_safety/config/prompts.yml)), with contents like the following partial example:
 
    ```{literalinclude} ../examples/configs/gs_content_safety/config/prompts.yml
    :language: yaml
