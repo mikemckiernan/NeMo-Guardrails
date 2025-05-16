@@ -119,14 +119,14 @@ For more details about the command and its usage, see the [CLI documentation](..
 
 #### Using LLMs with Reasoning Traces
 
-By default, reasoning models, such as [DeepSeek-R1](https://huggingface.co/collections/deepseek-ai/deepseek-r1-678e1e131c0169c0bc89728d), include the reasoning traces in the model response.
-DeepSeek models use `<think>` and `</think>` as tokens to identify the traces.
+By default, reasoning models, such as [DeepSeek-R1](https://huggingface.co/collections/deepseek-ai/deepseek-r1-678e1e131c0169c0bc89728d) and [NVIDIA Llama 3.1 Nemotron Ultra 253B V1](https://build.nvidia.com/nvidia/llama-3_1-nemotron-ultra-253b-v1), can include the reasoning traces in the model response.
+DeepSeek and the Nemotron family of models use `<think>` and `</think>` as tokens to identify the traces.
 
-The reasoning traces and the tokens usually interfere with NeMo Guardrails and result in falsely triggering output guardrails for safe responses.
+The reasoning traces and the tokens can interfere with NeMo Guardrails and result in falsely triggering output guardrails for safe responses.
 To use these reasoning models, you can remove the traces and tokens from the model response with a configuration like the following example.
 
 ```{code-block} yaml
-:emphasize-lines: 5-
+:emphasize-lines: 5-8, 13-
 
 models:
   - type: main
@@ -136,6 +136,12 @@ models:
       remove_reasoning_traces: True
       start_token: "<think>"
       end_token: "</think>"
+
+  - type: main
+    engine: nim
+    model: nvidia/llama-3.1-nemotron-ultra-253b-v1
+    reasoning_config:
+      remove_reasoning_traces: True
 ```
 
 The `reasoning_config` field for a model specifies the required configuration for a reasoning model that returns reasoning traces.
@@ -146,6 +152,29 @@ You can specify the following parameters for a reasoning model:
 - `remove_reasoning_traces`: if the reasoning traces should be ignored (default `True`).
 - `start_token`: the start token for the reasoning process (default `<think>`).
 - `end_token`: the end token for the reasoning process (default `</think>`).
+
+Even if `remove_reasoning_traces` is set to `True`, end users can still receive the thinking traces from the Nemotron models by requesting the detailed thinking, as shown in the following example:
+
+```{code-block} bash
+:emphasize-lines: 7
+
+curl https://integrate.api.nvidia.com/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer ${NGC_API_KEY}" \
+  -d '{
+    "model": "nvidia/llama-3.1-nemotron-ultra-253b-v1",
+    "messages": [
+      {"role":"system","content":"detailed thinking on"},
+      {"role":"user","content":"Tell me about NeMo Guardrails in 50 words or less."}
+    ],
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "max_tokens": 4096,
+    "frequency_penalty": 0,
+    "presence_penalty": 0,
+    "stream": true
+  }'
+```
 
 #### NIM for LLMs
 
