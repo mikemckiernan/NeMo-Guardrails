@@ -142,16 +142,39 @@ models:
     model: nvidia/llama-3.1-nemotron-ultra-253b-v1
     reasoning_config:
       remove_reasoning_traces: True
+
+rails:
+  output:
+    apply_to_reasoning_traces: False
+```
+
+```{list-table}
+:header-rows: 1
+
+* - Field
+  - Description
+  - Default Value
+
+* - `reasoning_config.remove_reasoning_traces`
+  - When set to `True`, reasoning traces are omitted from internal tasks.
+  - `True`
+
+* - `reasoning_config.start_token`
+  - Specifies the start token for the reasoning trace.
+  - `<think>`
+
+* - `reasoning_config.end_token`
+  - Specifies the end token for the reasoning trace.
+  - `</think>`
+
+* - `rails.output.apply_to_reasoning_traces`
+  - When set to `True`, output rails are applied to the reasoning traces and the model response.
+    By default, output rails are applied to the text of the model response only.
+  - `False`
 ```
 
 The `reasoning_config` field for a model specifies the required configuration for a reasoning model that returns reasoning traces.
 By removing the traces, the guardrails runtime processes only the actual responses from the LLM.
-
-You can specify the following parameters for a reasoning model:
-
-- `remove_reasoning_traces`: if the reasoning traces should be ignored (default `True`).
-- `start_token`: the start token for the reasoning process (default `<think>`).
-- `end_token`: the end token for the reasoning process (default `</think>`).
 
 Even if `remove_reasoning_traces` is set to `True`, end users can still receive the thinking traces from the Nemotron models by requesting the detailed thinking, as shown in the following example:
 
