@@ -168,7 +168,8 @@ rails:
   - `</think>`
 
 * - `rails.output.apply_to_reasoning_traces`
-  - When set to `True`, output rails are applied to the reasoning traces and the model response.
+  - When set to `True`, output rails are always applied to the reasoning traces and the model response and
+    overrides the `remove_reasoning_traces` value.
     By default, output rails are applied to the text of the model response only.
   - `False`
 ```
