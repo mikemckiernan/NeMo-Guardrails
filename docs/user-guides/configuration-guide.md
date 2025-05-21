@@ -168,8 +168,9 @@ rails:
   - `</think>`
 
 * - `rails.output.apply_to_reasoning_traces`
-  - When set to `True`, output rails are always applied to the reasoning traces and the model response and
-    overrides the `remove_reasoning_traces` value.
+  - When set to `True`, output rails are always applied to the reasoning traces and the model response.
+    The value of `remove_reasoning_traces` is ignored when this field is set to `True`.
+
     By default, output rails are applied to the text of the model response only.
   - `False`
 ```
@@ -177,28 +178,46 @@ rails:
 The `reasoning_config` field for a model specifies the required configuration for a reasoning model that returns reasoning traces.
 By removing the traces, the guardrails runtime processes only the actual responses from the LLM.
 
+The following table summarizes the interaction between the `remove_reasoning_traces` and `apply_to_reasoning_traces` values:
+
+```{list-table}
+:header-rows: 1
+
+* - `remove_reasoning_traces`
+  - `output.apply_to_reasoning_traces`
+  - Outcome
+
+* - Any
+  - True
+  - Reasoning traces are not removed and output rails are applied to the reasoning traces and the model response.
+    The value of `remove_reasoning_traces` is ignored.
+
+* - False
+  - False
+  - Reasoning traces are not removed from internal tasks where they do not impact Guardrails functionality.
+    Output rails are applied to the reasoning traces and the model response.
+
+* - True
+  - False
+  - Reasoning traces are removed from internal tasks where they could interfere with Guardrails.
+    Output rails are applied to the model response only.
+```
+
 Even if `remove_reasoning_traces` is set to `True`, end users can still receive the thinking traces from the Nemotron models by requesting the detailed thinking, as shown in the following example:
 
 ```{code-block} bash
-:emphasize-lines: 7
+from nemoguardrails import LLMRails, RailsConfig
 
-curl https://integrate.api.nvidia.com/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${NGC_API_KEY}" \
-  -d '{
-    "model": "nvidia/llama-3.1-nemotron-ultra-253b-v1",
-    "messages": [
-      {"role":"system","content":"detailed thinking on"},
-      {"role":"user","content":"Tell me about NeMo Guardrails in 50 words or less."}
-    ],
-    "temperature": 0.6,
-    "top_p": 0.95,
-    "max_tokens": 4096,
-    "frequency_penalty": 0,
-    "presence_penalty": 0,
-    "stream": true
-  }'
+config = RailsConfig.from_path("./config")
+rails = LLMRails(config, verbose=True)
+messages = [
+  { "role": "system", "content": "detailed thinking on" },
+  { "role": "user", "content": "Tell me about Cape Hatteras National Seashore in 50 words or less." }
+]
+rails.generate(messages=messages)
 ```
+
+The referenced `./.config` directory uses the following sample file content.
 
 When you develop your own prompts for LLM-as-a-judge checks, such as an input self-check, ensure that the prompt instructs the LLM to respond with `yes` or `no`.
 Refer to the following examples:
