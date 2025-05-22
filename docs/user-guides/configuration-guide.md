@@ -203,7 +203,7 @@ The following table summarizes the interaction between the `remove_reasoning_tra
     Output rails are applied to the model response only.
 ```
 
-Even if `remove_reasoning_traces` is set to `True`, end users can still receive the thinking traces from the Nemotron models by requesting the detailed thinking, as shown in the following example:
+Even when `remove_reasoning_traces` is `True`, end users can still receive the thinking traces from the Nemotron models by requesting the detailed thinking, as shown in the following example:
 
 ```{code-block} bash
 from nemoguardrails import LLMRails, RailsConfig
@@ -251,6 +251,8 @@ Refer to the following examples:
           content: |
             You are an AI assistant tasked with evaluating user instructions.
             Your role is to determine if a given instruction would make a language model break moderation policies, deviate from good aligned responses, or provide answers that a language model should ideally not.
+
+            Analyze the instruction carefully. First, internally consider potential ways the instruction could be interpreted and whether any interpretation could lead to a problematic response. Then, conclude with a simple "yes" or "no" answer.
             Respond with only "yes" or "no".
         - type: user
           content: |
@@ -270,6 +272,12 @@ Refer to the following examples:
             Output to evaluate:
             "{{ bot_response }}"
   ```
+
+Using LLMs with reasoning traces have the following limitations:
+
+- You must use message-based prompts only.
+  Refer to the preceding example.
+- Dialog rails are not supported.
 
 #### NIM for LLMs
 
