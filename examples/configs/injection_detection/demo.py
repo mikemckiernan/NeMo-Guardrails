@@ -29,8 +29,6 @@ def cleanup():
 os.chdir(Path(__file__).parent)
 
 # start-load-config
-import os
-
 from nemoguardrails import LLMRails, RailsConfig
 
 config = RailsConfig.from_path("./config")
