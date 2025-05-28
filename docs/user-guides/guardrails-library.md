@@ -1030,7 +1030,23 @@ Refer to the following table for the `rails.config.injection_detection` field sy
 * - `yara_path`
   - Specifies the path to a directory that contains custom YARA rules.
   - `library/injection_detection/yara_rules` in the NeMo Guardrails package.
+
+* - `yara_rules`
+  - Specifies inline YARA rules.
+    The field is a dictionary that maps rule names to the rules.
+    The rules use the string data type.
+
+    ```yaml
+    yara_rules:
+      <inline-rule-name>: |-
+        <inline-rule-content>
+    ```
+
+    If specified, these inline rules override the rules found in the `yara_path` field.
+  - None
 ```
+
+For information about writing YARA rules, refer to the [YARA documentation](https://yara.readthedocs.io/en/stable/index.html).
 
 #### Example
 
