@@ -27,6 +27,8 @@ For a complete record of changes in a release, refer to the
     When this field is `True`, output rails are applied to the reasoning traces and the model output.
     For more information, refer to [](./user-guides/configuration-guide.md#using-llms-with-reasoning-traces).
   - The `reasoning_config.remove_thinking_traces` field is deprecated and replaced by the `reasoning_config.remove_reasoning_traces` field that has the same purpose and subfields.
+  - Previously, if `remove_thinking_traces` was set to `True`, the reasoning traces were omitted from the final response presented to the end user.
+    In this release, `remove_reasoning_traces` controls whether reasoning traces are removed from internal tasks and has no effect on the final response presented to the user.
   - Using advanced reasoning models with dialog rails is not supported.
 - Simplified and broadened support for chat model providers from LangChain and
   LangChain Community chat model providers.
